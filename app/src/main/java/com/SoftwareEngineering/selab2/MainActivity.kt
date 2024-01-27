@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.SoftwareEngineering.selab2.ui.theme.SELab2Theme
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         text = "Hello $name!",
         modifier = modifier
     )
+//    val database = Firebase.database
+//    val myRef = database.getReference("message")
+//
+//    myRef.setValue("Hello, World!")
 }
 
 @Preview(showBackground = true)
