@@ -83,7 +83,7 @@ fun HomeScreen() {
                     painter = if (lightsOn) painterResource(R.drawable.lighton)
                     else painterResource(R.drawable.lightoff),
                     contentDescription = "",
-                    colorFilter = if (lightsOn) ColorFilter.tint(color = Color.Red)
+                    colorFilter = if (lightsOn) ColorFilter.tint(color = Color.Black)
                     else ColorFilter.tint(color = Color.LightGray)
                 )
 
@@ -133,7 +133,7 @@ fun HomeScreen() {
                     painter = if (doorOpen) painterResource(R.drawable.dooropen)
                     else painterResource(R.drawable.doorclosed),
                     contentDescription = "",
-                    colorFilter = if (doorOpen) ColorFilter.tint(color = Color.Green)
+                    colorFilter = if (doorOpen) ColorFilter.tint(color = Color.Black)
                     else ColorFilter.tint(color = Color.LightGray)
                 )
 
@@ -183,7 +183,7 @@ fun HomeScreen() {
                     painter = if (windowOpen) painterResource(R.drawable.windowopen)
                     else painterResource(R.drawable.windowclosed),
                     contentDescription = "",
-                    colorFilter = if (windowOpen) ColorFilter.tint(color = Color.Blue)
+                    colorFilter = if (windowOpen) ColorFilter.tint(color = Color.Black)
                         else ColorFilter.tint(color = Color.LightGray)
                 )
 
