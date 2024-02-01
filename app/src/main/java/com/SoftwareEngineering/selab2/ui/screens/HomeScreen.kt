@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,6 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
@@ -29,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.SoftwareEngineering.selab2.R
 import com.SoftwareEngineering.selab2.ui.App
+import com.google.firebase.database.collection.LLRBNode
 
 @Composable
 fun HomeScreen() {
@@ -79,6 +83,8 @@ fun HomeScreen() {
                     painter = if (lightsOn) painterResource(R.drawable.lighton)
                     else painterResource(R.drawable.lightoff),
                     contentDescription = "",
+                    colorFilter = if (lightsOn) ColorFilter.tint(color = Color.Magenta)
+                    else ColorFilter.tint(color = Color.LightGray)
                 )
 
                 Switch(
@@ -127,6 +133,8 @@ fun HomeScreen() {
                     painter = if (doorOpen) painterResource(R.drawable.dooropen)
                     else painterResource(R.drawable.doorclosed),
                     contentDescription = "",
+                    colorFilter = if (doorOpen) ColorFilter.tint(color = Color.Red)
+                    else ColorFilter.tint(color = Color.LightGray)
                 )
 
                 Switch(
@@ -175,6 +183,8 @@ fun HomeScreen() {
                     painter = if (windowOpen) painterResource(R.drawable.windowopen)
                     else painterResource(R.drawable.windowclosed),
                     contentDescription = "",
+                    colorFilter = if (windowOpen) ColorFilter.tint(color = Color.Black)
+                        else ColorFilter.tint(color = Color.LightGray)
                 )
 
                 Switch(
