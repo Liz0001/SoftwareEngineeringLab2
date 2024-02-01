@@ -13,9 +13,11 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +37,7 @@ fun HomeScreen(
     statesViewModel: MutableState<States?>,
     modifier: Modifier = Modifier
 ) {
-    Log.i("HomeScreen", "doorOpen: ${statesViewModel.value?.doorOpen}, lightOn: ${statesViewModel.value?.lightOn}, windowOpen: ${statesViewModel.value?.windowOpen}")
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -49,8 +51,7 @@ fun HomeScreen(
             verticalAlignment = Alignment.CenterVertically
 
         ) {
-            var lightsOn by remember { mutableStateOf(statesViewModel.value?.lightOn) }
-            Log.i("HomeScreen", "lightOn: ${lightsOn} ..............................................")
+            var lightsOn by remember { mutableStateOf(statesViewModel.value?.lightOn ?: true) }
 
             Row(
                 modifier = Modifier
@@ -101,9 +102,7 @@ fun HomeScreen(
             verticalAlignment = Alignment.CenterVertically
 
         ) {
-            var doorOpen by remember { mutableStateOf(statesViewModel.value?.doorOpen) }
-            Log.i("HomeScreen", "doorOpen: ${doorOpen}..............................................")
-
+            var doorOpen by remember { mutableStateOf(statesViewModel.value?.doorOpen ?: true) }
 
             Row(
                 modifier = Modifier
@@ -153,8 +152,7 @@ fun HomeScreen(
             verticalAlignment = Alignment.CenterVertically
 
         ) {
-            var windowOpen by remember { mutableStateOf(statesViewModel.value?.windowOpen) }
-            Log.i("HomeScreen", "windowOpen: ${windowOpen} ..............................................")
+            var windowOpen by remember { mutableStateOf(statesViewModel.value?.windowOpen  ?: true) }
 
             Row(
                 modifier = Modifier

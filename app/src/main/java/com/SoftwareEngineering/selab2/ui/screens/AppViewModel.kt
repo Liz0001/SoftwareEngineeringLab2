@@ -31,10 +31,8 @@ class AppViewModel: ViewModel() {
 
                 override fun onDataChange(snapshot: DataSnapshot) {
                     val currStates = snapshot.getValue(States::class.java)
-                    Log.i("XXX", "lightsOn: ${currStates?.lightOn}..................................sksl;ck;ws")
-
-//                    updateStates(currStates)
                     _states.value = currStates
+//                    updateStates(currStates)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
@@ -42,7 +40,6 @@ class AppViewModel: ViewModel() {
                 }
             })
     }
-
 
 //    private fun updateStates(statesList: States?) {
 //        // update the StateFlow with entire list...
