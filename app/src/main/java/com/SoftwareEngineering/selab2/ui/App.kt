@@ -14,8 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.text.font.FontWeight
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.tooling.preview.Preview
+import com.SoftwareEngineering.selab2.ui.screens.AppViewModel
 import com.SoftwareEngineering.selab2.ui.screens.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -32,7 +33,8 @@ fun App(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(it),
         ) {
-            HomeScreen()
+            val statesViewModel: AppViewModel = viewModel()
+            HomeScreen(statesViewModel = statesViewModel.states)
         }
     }
 }
