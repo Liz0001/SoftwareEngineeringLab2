@@ -39,6 +39,10 @@ fun HomeScreen() {
     ) {
 
 //        ButtonSection(name = "LAMP")
+//        ButtonSection(name = "DOOR")
+//        ButtonSection(name = "WINDOW")
+
+        // LAMP
         Row(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -73,7 +77,7 @@ fun HomeScreen() {
                         .size(50.dp)
                         .padding(end = 16.dp),
                     painter = if (lightsOn) painterResource(R.drawable.lighton)
-                        else painterResource(R.drawable.lightoff),
+                    else painterResource(R.drawable.lightoff),
                     contentDescription = "",
                 )
 
@@ -83,46 +87,103 @@ fun HomeScreen() {
                     checked = lightsOn,
                     onCheckedChange = { lightsOn = it }
                 )
-
-
             }
         }
 
-
-
+        // DOOR
         Row(
             modifier = Modifier
-                .padding(vertical = 30.dp),
-            verticalAlignment = Alignment.Bottom
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
 
         ) {
-            Text(
-                text = "DOOR: ",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold
-            )
+            var doorOpen by remember { mutableStateOf(true) }
 
-            Text(
-                text = "OPEN",
-                fontSize = 20.sp
-            )
+            Row(
+                modifier = Modifier
+                    .padding(vertical = 30.dp),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Text(
+                    text = "DOOR: ",
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = if (doorOpen) "OPEN" else "CLOSED",
+                    fontSize = 20.sp
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+
+            ) {
+
+                Image(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(end = 16.dp),
+                    painter = if (doorOpen) painterResource(R.drawable.dooropen)
+                    else painterResource(R.drawable.doorclosed),
+                    contentDescription = "",
+                )
+
+                Switch(
+                    modifier = Modifier
+                        .semantics { contentDescription = "" },
+                    checked = doorOpen,
+                    onCheckedChange = { doorOpen = it }
+                )
+            }
         }
 
+        // WINDOW
         Row(
             modifier = Modifier
-                .padding(vertical = 30.dp),
-            verticalAlignment = Alignment.Bottom
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
 
         ) {
-            Text(
-                text = "WINDOW: ",
-                fontSize = 25.sp,
-                fontWeight = FontWeight.Bold
-            )
-            Text(
-                text = "OPEN",
-                fontSize = 20.sp
-            )
+            var windowOpen by remember { mutableStateOf(true) }
+
+            Row(
+                modifier = Modifier
+                    .padding(vertical = 30.dp),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Text(
+                    text = "WINDOW: ",
+                    fontSize = 25.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = if (windowOpen) "OPEN" else "CLOSED",
+                    fontSize = 20.sp
+                )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+
+            ) {
+
+                Image(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(end = 16.dp),
+                    painter = if (windowOpen) painterResource(R.drawable.windowopen)
+                    else painterResource(R.drawable.windowclosed),
+                    contentDescription = "",
+                )
+
+                Switch(
+                    modifier = Modifier
+                        .semantics { contentDescription = "" },
+                    checked = windowOpen,
+                    onCheckedChange = { windowOpen = it }
+                )
+            }
         }
     }
 }
@@ -130,16 +191,78 @@ fun HomeScreen() {
 
 @Composable
 fun ButtonSection(
-    name:String,
-
+    name: String,
     ) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = name,
-//            fontSize = 20.sp
-        )
+        var activated by remember { mutableStateOf(true) }
+
+        Row(
+            modifier = Modifier
+                .padding(vertical = 30.dp),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Text(
+                text = "$name: ",
+                fontSize = 25.sp,
+                fontWeight = FontWeight.Bold
+            )
+            if (name == "LAMP") {
+                Text(
+                    text = if (activated) "ON" else "OFF",
+                    fontSize = 20.sp
+                )
+            } else {
+                Text(
+                    text = if (activated) "OPEN" else "CLOSED",
+                    fontSize = 20.sp
+                )
+            }
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            if (name == "LAMP") {
+                Image(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(end = 16.dp),
+                    painter = if (activated) { painterResource(R.drawable.lighton)}
+                    else {painterResource(R.drawable.lightoff)},
+                    contentDescription = "",
+                )
+            }
+            if (name == "DOOR") {
+                Image(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(end = 16.dp),
+                    painter = if (activated) painterResource(R.drawable.dooropen)
+                    else painterResource(R.drawable.doorclosed),
+                    contentDescription = "",
+                )
+            }
+            if (name == "WINDOW") {
+                Image(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .padding(end = 16.dp),
+                    painter = if (activated) painterResource(R.drawable.windowopen)
+                    else painterResource(R.drawable.windowclosed),
+                    contentDescription = "",
+                )
+            }
+            Switch(
+                modifier = Modifier
+                    .semantics { contentDescription = "" },
+                checked = activated,
+                onCheckedChange = { activated = it }
+            )
+        }
     }
 }
 
