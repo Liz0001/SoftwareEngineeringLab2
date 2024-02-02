@@ -45,8 +45,8 @@ class AppViewModel: ViewModel() {
             })
     }
 
-    fun updateDatabase(field: String, value: Boolean) {
+    fun updateDatabase(element: String, value: Boolean) {
         val statesReference = FirebaseDatabase.getInstance().getReference("states")
-        statesReference.child(field).setValue(value)
+        statesReference.child(element).setValue(value)
     }
 }

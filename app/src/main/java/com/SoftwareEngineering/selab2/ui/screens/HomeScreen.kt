@@ -1,6 +1,8 @@
 package com.SoftwareEngineering.selab2.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,12 +33,13 @@ import com.SoftwareEngineering.selab2.data.States
 
 @Composable
 fun HomeScreen(
+    vm: AppViewModel,
     statesUIStates: StatesUiStates,
     modifier: Modifier = Modifier
 ) {
     when (statesUIStates) {
         is StatesUiStates.Loading -> Screen("...", modifier = modifier.fillMaxSize())
-        is StatesUiStates.Success -> ViewScreen(statesUIStates.states)
+        is StatesUiStates.Success -> ViewScreen(vm, statesUIStates.states)
         is StatesUiStates.Error -> Screen("Oh noo", modifier = modifier.fillMaxSize())
     }
 }
@@ -57,6 +60,7 @@ fun Screen(
 
 @Composable
 fun ViewScreen(
+    vm: AppViewModel,
     states: States,
     modifier: Modifier = Modifier
 ) {
@@ -111,7 +115,9 @@ fun ViewScreen(
                     modifier = Modifier
                         .semantics { contentDescription = "" },
                     checked = lightsOn == true,
-                    onCheckedChange = { lightsOn = it }
+                    onCheckedChange = { it ->
+                        lightsOn = it
+                        lightsOn?.let { vm.updateDatabase("lightOn", it) } },
                 )
 
             }
@@ -162,7 +168,9 @@ fun ViewScreen(
                     modifier = Modifier
                         .semantics { contentDescription = "" },
                     checked = doorOpen == true,
-                    onCheckedChange = { doorOpen = it }
+                    onCheckedChange = { it ->
+                        doorOpen = it
+                        doorOpen?.let { vm.updateDatabase("doorOpen", it) } },
                 )
             }
         }
@@ -212,7 +220,10 @@ fun ViewScreen(
                     modifier = Modifier
                         .semantics { contentDescription = "" },
                     checked = windowOpen == true,
-                    onCheckedChange = { windowOpen = it }
+                    onCheckedChange = { it ->
+                        windowOpen = it
+                        windowOpen?.let { vm.updateDatabase("windowOpen", it) } },
+
                 )
             }
         }
