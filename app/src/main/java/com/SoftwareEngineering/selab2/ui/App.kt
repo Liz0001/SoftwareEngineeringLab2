@@ -14,13 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
+import com.SoftwareEngineering.selab2.SpeechRecognition
 import com.SoftwareEngineering.selab2.ui.screens.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App(modifier: Modifier = Modifier) {
+fun App(speechRecognition: SpeechRecognition) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier
@@ -32,7 +31,7 @@ fun App(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(it),
         ) {
-            HomeScreen()
+            HomeScreen(speechRecognition)
         }
     }
 }
@@ -59,9 +58,3 @@ fun AppTopAppBar(
     )
 }
 
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun AppPreview() {
-    App()
-}

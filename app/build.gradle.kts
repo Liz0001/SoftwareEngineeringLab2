@@ -1,5 +1,3 @@
-import org.apache.tools.ant.util.JavaEnvUtils.VERSION_1_8
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -72,4 +70,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
     implementation("androidx.compose.material3:material3:1.2.0-rc01")
+    implementation ("androidx.compose.runtime:runtime-livedata:1.4.3")
+    implementation ("androidx.activity:activity-compose:1.3.1")
 }
