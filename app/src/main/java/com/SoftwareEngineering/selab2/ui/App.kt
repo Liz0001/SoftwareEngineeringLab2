@@ -34,7 +34,7 @@ fun App(modifier: Modifier = Modifier) {
                 .padding(it),
         ) {
             val statesViewModel: AppViewModel = viewModel()
-            HomeScreen(statesViewModel = statesViewModel.states)
+            HomeScreen(statesUIStates = statesViewModel.statesUIStates)
         }
     }
 }

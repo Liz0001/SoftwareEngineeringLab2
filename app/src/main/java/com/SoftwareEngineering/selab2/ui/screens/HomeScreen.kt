@@ -1,6 +1,5 @@
 package com.SoftwareEngineering.selab2.ui.screens
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,15 +11,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -34,7 +31,33 @@ import com.SoftwareEngineering.selab2.data.States
 
 @Composable
 fun HomeScreen(
-    statesViewModel: MutableState<States?>,
+    statesUIStates: StatesUiStates,
+    modifier: Modifier = Modifier
+) {
+    when (statesUIStates) {
+        is StatesUiStates.Loading -> Screen("...", modifier = modifier.fillMaxSize())
+        is StatesUiStates.Success -> ViewScreen(statesUIStates.states)
+        is StatesUiStates.Error -> Screen("Oh noo", modifier = modifier.fillMaxSize())
+    }
+}
+
+@Composable
+fun Screen(
+    message: String,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(text = message)
+    }
+}
+
+
+@Composable
+fun ViewScreen(
+    states: States,
     modifier: Modifier = Modifier
 ) {
 
@@ -51,7 +74,7 @@ fun HomeScreen(
             verticalAlignment = Alignment.CenterVertically
 
         ) {
-            var lightsOn by remember { mutableStateOf(statesViewModel.value?.lightOn ?: true) }
+            var lightsOn by remember { mutableStateOf(states?.lightOn) }
 
             Row(
                 modifier = Modifier
@@ -102,7 +125,7 @@ fun HomeScreen(
             verticalAlignment = Alignment.CenterVertically
 
         ) {
-            var doorOpen by remember { mutableStateOf(statesViewModel.value?.doorOpen ?: true) }
+            var doorOpen by remember { mutableStateOf(states?.doorOpen) }
 
             Row(
                 modifier = Modifier
@@ -152,7 +175,7 @@ fun HomeScreen(
             verticalAlignment = Alignment.CenterVertically
 
         ) {
-            var windowOpen by remember { mutableStateOf(statesViewModel.value?.windowOpen  ?: true) }
+            var windowOpen by remember { mutableStateOf(states?.windowOpen) }
 
             Row(
                 modifier = Modifier
