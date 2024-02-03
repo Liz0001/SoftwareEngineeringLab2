@@ -15,13 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.compose.ui.tooling.preview.Preview
 import com.SoftwareEngineering.selab2.ui.screens.AppViewModel
+import com.SoftwareEngineering.selab2.SpeechRecognition
 import com.SoftwareEngineering.selab2.ui.screens.HomeScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App(modifier: Modifier = Modifier) {
+fun App(speechRecognition: SpeechRecognition) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Scaffold(
         modifier = Modifier
@@ -34,7 +34,7 @@ fun App(modifier: Modifier = Modifier) {
                 .padding(it),
         ) {
             val statesViewModel: AppViewModel = viewModel()
-            HomeScreen(vm = statesViewModel, statesUIStates = statesViewModel.statesUIStates)
+            HomeScreen(vm = statesViewModel, statesUIStates = statesViewModel.statesUIStates, speechRecognition)
         }
     }
 }
@@ -59,11 +59,4 @@ fun AppTopAppBar(
         },
         modifier = modifier,
     )
-}
-
-
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun AppPreview() {
-    App()
 }

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.SoftwareEngineering.selab2.R
+import com.SoftwareEngineering.selab2.SpeechRecognition
 import com.SoftwareEngineering.selab2.data.States
 import kotlinx.coroutines.delay
 
@@ -35,11 +36,12 @@ import kotlinx.coroutines.delay
 fun HomeScreen(
     vm: AppViewModel,
     statesUIStates: StatesUiStates,
+    speechRecognition: SpeechRecognition,
     modifier: Modifier = Modifier
 ) {
     when (statesUIStates) {
         is StatesUiStates.Loading -> MessageScreen("...", modifier = modifier.fillMaxSize())
-        is StatesUiStates.Success -> ViewScreen(vm, statesUIStates.states, modifier)
+        is StatesUiStates.Success -> ViewScreen(vm, statesUIStates.states, speechRecognition, modifier)
         is StatesUiStates.Error -> MessageScreen("Oh noo", modifier = modifier.fillMaxSize())
     }
 }
@@ -62,12 +64,13 @@ fun MessageScreen(
 fun ViewScreen(
     vm: AppViewModel,
     states: States,
+    speechRecognition: SpeechRecognition,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(30.dp),
+            .fillMaxWidth()
+            .padding(30.dp)
     ) {
         ControlRow("LAMP", states.lightOn) { vm.updateDatabase("lightOn", it) }
 
@@ -75,9 +78,11 @@ fun ViewScreen(
 
         ControlRow("WINDOW", states.windowOpen) { vm.updateDatabase("windowOpen", it) }
 
-        SpeechToText()
+        SpeechToTextSection(speechRecognition)
+//      SpeechRecognitionSection(speechRecognition)
     }
 }
+
 
 @Composable
 fun ControlRow(
@@ -87,7 +92,8 @@ fun ControlRow(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(vertical = 8.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
