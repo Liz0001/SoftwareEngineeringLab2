@@ -65,6 +65,8 @@ class AppViewModel: ViewModel() {
                 statesUIStates = StatesUiStates.Error
             }
         })
-
     }
+
+
+    var textFromSpeech: String by mutableStateOf("")
 }

@@ -17,7 +17,9 @@ fun SpeechToText() {
 
 
         Button(
-            onClick = {}
+            onClick = {
+
+            }
         ) {
             Text(text = "Speak")
         }
