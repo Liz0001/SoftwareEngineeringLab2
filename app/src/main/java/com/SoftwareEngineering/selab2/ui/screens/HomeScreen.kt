@@ -1,9 +1,7 @@
 package com.SoftwareEngineering.selab2.ui.screens
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,13 +12,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -31,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.SoftwareEngineering.selab2.R
 import com.SoftwareEngineering.selab2.data.States
+import kotlinx.coroutines.delay
 
 @Composable
 fun HomeScreen(
@@ -93,6 +92,13 @@ fun ControlRow(
         verticalAlignment = Alignment.CenterVertically
     ) {
         var state by remember { mutableStateOf(isChecked) }
+
+        LaunchedEffect(isChecked) {
+            if (isChecked == true || isChecked != true) {
+                state = isChecked
+                delay(500)
+            }
+        }
 
         Row(
             modifier = Modifier

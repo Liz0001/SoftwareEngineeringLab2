@@ -39,7 +39,7 @@ class AppViewModel: ViewModel() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    Log.e("Oopsie", "Data fetching cancelled: ${error.message}")
+                    Log.e("Oopsie", "Data fetching error: ${error.message}")
                     statesUIStates = StatesUiStates.Error
                 }
             })
@@ -48,5 +48,23 @@ class AppViewModel: ViewModel() {
     fun updateDatabase(element: String, value: Boolean) {
         val statesReference = FirebaseDatabase.getInstance().getReference("states")
         statesReference.child(element).setValue(value)
+    }
+
+    private val db = FirebaseDatabase.getInstance().reference
+    private val statesRef = db.child("states")
+
+    init {
+        statesRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val update = snapshot.getValue(States::class.java)
+                statesUIStates = update?.let { StatesUiStates.Success(it) }!!
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Oopsie", "Data update error: ${error.message}")
+                statesUIStates = StatesUiStates.Error
+            }
+        })
+
     }
 }
