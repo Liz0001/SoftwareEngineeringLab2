@@ -12,18 +12,18 @@ class SpeechRecognition(
     private val context: Context,
     private val startForResult: ActivityResultLauncher<Intent>
 ) {
-//override fun onStartForResult(data: Intent?){
-//    super.onStartForResult(data)
-//}
     private fun speechInput() {
         if (!SpeechRecognizer.isRecognitionAvailable(context)) {
             Toast.makeText(context, "Speech Not Recognized!",Toast.LENGTH_SHORT).show()
             return
         } else {
             val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now")
+            intent.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now")
 
             return startForResult.launch(intent)
         }
