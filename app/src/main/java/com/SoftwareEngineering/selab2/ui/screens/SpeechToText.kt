@@ -34,6 +34,11 @@ fun SpeechToTextSection(
         Button(
             onClick = {
                 speechRecognition.startSpeechRecognition()
+
+
+//                val text = speechRecognition.startSpeechRecognition()
+//                recognizedText = text.toString()
+
             },
             modifier = Modifier.padding(top = 16.dp)
         ) {
