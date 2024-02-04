@@ -69,4 +69,6 @@ class AppViewModel: ViewModel() {
 
 
     var textFromSpeech: String by mutableStateOf("")
+
+
 }
