@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import com.SoftwareEngineering.selab2.data.VoiceToTextState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -57,7 +58,6 @@ class VoiceToText(
         recognizer.stopListening()
     }
 
-
     override fun onReadyForSpeech(p0: Bundle?) {
         _state.update {
             it.copy(
@@ -106,10 +106,3 @@ class VoiceToText(
     override fun onPartialResults(p0: Bundle?) = Unit
     override fun onEvent(p0: Int, p1: Bundle?) = Unit
 }
-
-// TODO: Move it to data folder
-data class VoiceToTextState(
-    val text: String = "",
-    val isSpeaking: Boolean = false,
-    val error: String? = null
-)

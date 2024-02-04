@@ -28,20 +28,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.SoftwareEngineering.selab2.R
-import com.SoftwareEngineering.selab2.SpeechRecognition
+import com.SoftwareEngineering.selab2.VoiceToText
 import com.SoftwareEngineering.selab2.data.States
+import com.SoftwareEngineering.selab2.data.VoiceToTextState
 import kotlinx.coroutines.delay
 
 @Composable
 fun HomeScreen(
     vm: AppViewModel,
+    state: VoiceToTextState,
+    voiceToText: VoiceToText,
     statesUIStates: StatesUiStates,
-    speechRecognition: SpeechRecognition,
     modifier: Modifier = Modifier
 ) {
     when (statesUIStates) {
         is StatesUiStates.Loading -> MessageScreen("...", modifier = modifier.fillMaxSize())
-        is StatesUiStates.Success -> ViewScreen(vm, statesUIStates.states, speechRecognition, modifier)
+        is StatesUiStates.Success -> ViewScreen(vm, state, voiceToText, statesUIStates.states, modifier)
         is StatesUiStates.Error -> MessageScreen("Oh noo", modifier = modifier.fillMaxSize())
     }
 }
@@ -63,8 +65,9 @@ fun MessageScreen(
 @Composable
 fun ViewScreen(
     vm: AppViewModel,
+    state: VoiceToTextState,
+    voiceToText: VoiceToText,
     states: States,
-    speechRecognition: SpeechRecognition,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -78,7 +81,7 @@ fun ViewScreen(
 
         ControlRow("WINDOW", states.windowOpen) { vm.updateDatabase("windowOpen", it) }
 
-        SpeechToTextSection(vm, speechRecognition)
+        SpeechToTextSection(vm, state, voiceToText)
     }
 }
 
