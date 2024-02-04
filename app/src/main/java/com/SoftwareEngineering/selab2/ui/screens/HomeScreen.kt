@@ -78,8 +78,7 @@ fun ViewScreen(
 
         ControlRow("WINDOW", states.windowOpen) { vm.updateDatabase("windowOpen", it) }
 
-        SpeechToTextSection(speechRecognition)
-//      SpeechRecognitionSection(speechRecognition)
+        SpeechToTextSection(vm, speechRecognition)
     }
 }
 

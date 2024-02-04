@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import java.util.Locale
 
-class SpeechRecognition(private val context: Context, private val startForResult: ActivityResultLauncher<Intent>) {
-
+class SpeechRecognition(
+    private val context: Context,
+    private val startForResult: ActivityResultLauncher<Intent>
+) {
     private fun speechInput() {
         if (!SpeechRecognizer.isRecognitionAvailable(context)) {
             Toast.makeText(context, "Speech Not Recognized!",Toast.LENGTH_SHORT).show()
@@ -20,11 +22,11 @@ class SpeechRecognition(private val context: Context, private val startForResult
                 putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
                 putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak Now")
             }
-            startForResult.launch(intent)
+            return startForResult.launch(intent)
         }
     }
 
     fun startSpeechRecognition() {
-        speechInput()
+        return speechInput()
     }
 }
